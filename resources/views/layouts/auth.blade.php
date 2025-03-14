@@ -8,11 +8,9 @@
     @vite('resources/scss/app.scss')
 </head>
 
-<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    @include('parts.sidebar')
-    @yield('js')
+<body class="@yield('body-class') bg-body-secondary">
+    @yield('content')
     @vite('resources/js/app.js')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>

@@ -18,6 +18,7 @@
         "admin-lte": "^4.0.0-beta3",
         "bootstrap": "^5.3.3",
         "bootstrap-icons": "^1.11.3",
+        "chart.js": "^4.4.8",
         "overlayscrollbars": "^2.11.1"
     }
 }
