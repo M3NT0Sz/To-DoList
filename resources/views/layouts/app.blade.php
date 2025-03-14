@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'To-Do List')</title>
-    @vite('resources/css/app.css')
+    @vite('resources/scss/app.scss')
 </head>
 
-<body>
+<body class="@yield('body-class') bg-body-secondary">
     @yield('content')
     @vite('resources/js/app.js')
 </body>
