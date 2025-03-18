@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [
                 {
                     label: 'Tarefas feitas',

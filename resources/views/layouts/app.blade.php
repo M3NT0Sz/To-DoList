@@ -9,7 +9,18 @@
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    @include('parts.sidebar')
+    <div class="app-wrapper">
+        @include('parts.header')
+        @include('parts.sidebar')
+        <main class="app-main">
+            @include('parts.content-header')
+            <div class="app-content">
+                <div class="container-fluid">
+                    @yield('content')
+                </div>
+            </div>
+        </main>
+    </div>
     @yield('js')
     @vite('resources/js/app.js')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

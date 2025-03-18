@@ -20,7 +20,7 @@
                         <div class="input-group-text"><span class="bi bi-envelope"></span></div>
                         <div class="form-floating">
                             <input id="loginEmail" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="" placeholder="{{ old('email') }}" />
+                                name="email" value="{{ old('email') }}" placeholder="Email" />
                             <label for="loginEmail">Email</label>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="form-floating">
                             <input id="loginPassword" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password"
-                                placeholder="" />
+                                placeholder="Password" />
                             <label for="loginPassword">Password</label>
                         </div>
                     </div>
