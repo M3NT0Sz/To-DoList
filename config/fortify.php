@@ -115,8 +115,8 @@ return [
     */
 
     'limiters' => [
-        'login' => 5,
-        'two-factor' => 5,
+        'login' => null,
+        'two-factor' => null,
     ],
 
     /*

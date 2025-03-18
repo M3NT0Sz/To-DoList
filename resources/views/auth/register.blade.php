@@ -8,7 +8,7 @@
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header">
-                <a href="{{ route('index') }}"
+                <a href="{{ route('welcome') }}"
                     class="link-dark text-center link-offset-2 link-opacity-100 link-opacity-50-hover">
                     <h1 class="mb-0"><b>To-DoList</b></h1>
                 </a>
@@ -20,7 +20,8 @@
                     <div class="input-group mb-1">
                         <div class="input-group-text"><span class="bi bi-person"></span></div>
                         <div class="form-floating">
-                            <input id="registerFullName" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                            <input id="registerFullName" type="text"
+                                class="form-control @error('name') is-invalid @enderror" name="name"
                                 placeholder="{{ old('name') }}" />
                             <label for="registerFullName">Full Name</label>
                         </div>
@@ -28,15 +29,16 @@
                     <div class="input-group mb-1">
                         <div class="input-group-text"><span class="bi bi-envelope"></span></div>
                         <div class="form-floating">
-                            <input id="registerEmail" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                                placeholder="{{ old('email') }}" />
+                            <input id="registerEmail" type="email" class="form-control @error('email') is-invalid @enderror"
+                                name="email" placeholder="{{ old('email') }}" />
                             <label for="registerEmail">Email</label>
                         </div>
                     </div>
                     <div class="input-group mb-1">
                         <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
                         <div class="form-floating">
-                            <input id="registerPassword" type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                            <input id="registerPassword" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password"
                                 placeholder="" />
                             <label for="registerPassword">Password</label>
                         </div>

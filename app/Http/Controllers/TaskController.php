@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use DB;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -10,12 +11,29 @@ class TaskController extends Controller
     public function welcome()
     {
         $labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        return view('welcome');
+        $aFazer = [];
+        $feitas = [];
+
+        for ($month = 1; $month <= 12; $month++) {
+            $aFazer[] = DB::table('tasks')
+                ->where('completed', 'pending')
+                ->whereMonth('due_date', $month)
+                ->where('user_id', auth()->id())
+                ->count();
+
+            $feitas[] = DB::table('tasks')
+                ->where('completed', 'completed')
+                ->whereMonth('due_date', $month)
+                ->where('user_id', auth()->id())
+                ->count();
+        }
+
+        return view('welcome', compact('labels', 'feitas', 'aFazer'));
     }
 
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = DB::table('tasks')->where('user_id', auth()->id())->paginate(10);
         return view('tasks.index', ['tasks' => $tasks]);
     }
 

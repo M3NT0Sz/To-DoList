@@ -27,11 +27,11 @@
                     <td>{{ $task->title }}</td>
                     <td>{{ $task->description }}</td>
                     <td>{{ $task->priority }}</td>
-                    <td>{{ \Carbon\Carbon::parse($task->due_date)->translatedFormat('d/m/Y') }}</td>
+                    <td class="@if($task->due_date < now() && $task->completed == 'pending') table-danger @endif">{{ \Carbon\Carbon::parse($task->due_date)->translatedFormat('d/m/Y') }}</td>
                     <td>{{ $task->completed }}</td>
                     <td>
-                        <div class="d-flex">
-                            <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-primary btn-sm mr-2">Editar</a>
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-primary btn-sm">Editar</a>
                             <form action="{{ route('tasks.destroy', $task->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
@@ -43,4 +43,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $tasks->links() }}
 @endsection
