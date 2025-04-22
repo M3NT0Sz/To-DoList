@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             @foreach ($tasks as $task)
-                <tr class="@if($task->completed == 'completed') table-success @elseif($task->completed == 'pending') table-warning @endif">
+                <tr>
                     <th scope="row">{{ $task->id }}</th>
                     <td>{{ $task->title }}</td>
                     <td>{{ $task->description }}</td>
