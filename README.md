@@ -1,66 +1,281 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📝 To-Do List
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Uma aplicação web moderna de gerenciamento de tarefas construída com Laravel 12, oferecendo uma interface intuitiva para organizar e controlar suas atividades diárias.
 
-## About Laravel
+## 🚀 Características
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- ✅ **Gerenciamento Completo de Tarefas**: Criar, editar, visualizar e excluir tarefas
+- 👥 **Sistema de Autenticação**: Login seguro com Laravel Fortify
+- 🎯 **Níveis de Prioridade**: Organize tarefas por prioridade (baixa, média, alta)
+- 📅 **Prazos**: Defina datas de vencimento para suas tarefas
+- ✔️ **Status de Conclusão**: Marque tarefas como pendentes ou concluídas
+- 📱 **Interface Responsiva**: Design moderno com AdminLTE 4 e Bootstrap 5
+- 🔒 **Segurança**: Cada usuário acessa apenas suas próprias tarefas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Tecnologias Utilizadas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Backend
+- **Laravel 12** - Framework PHP moderno
+- **Laravel Fortify** - Autenticação robusta
+- **MySQL** - Banco de dados relacional
+- **PHP 8.2+** - Linguagem de programação
 
-## Learning Laravel
+### Frontend
+- **AdminLTE 4** - Template de interface administrativa
+- **Bootstrap 5** - Framework CSS
+- **Bootstrap Icons** - Ícones vetoriais
+- **Chart.js** - Gráficos e visualizações
+- **Vite** - Build tool moderno
+- **Sass** - Pré-processador CSS
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Testes
+- **Pest PHP** - Framework de testes moderno
+- **Laravel Pint** - Code style fixer
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 📋 Pré-requisitos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Certifique-se de ter instalado:
 
-## Laravel Sponsors
+- PHP >= 8.2
+- Composer
+- Node.js >= 18
+- NPM ou Yarn
+- MySQL >= 8.0
+- Git
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## ⚡ Instalação Rápida
 
-### Premium Partners
+### 1. Clone o repositório
+```bash
+git clone https://github.com/M3NT0Sz/To-DoList.git
+cd to-dolist
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 2. Instale as dependências do PHP
+```bash
+composer install
+```
 
-## Contributing
+### 3. Instale as dependências do Node.js
+```bash
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Configure o ambiente
+```bash
+# Copie o arquivo de configuração
+copy .env.example .env
 
-## Code of Conduct
+# Gere a chave da aplicação
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 5. Configure o banco de dados
+Edite o arquivo `.env` e configure as credenciais do MySQL:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=todolist
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
 
-## Security Vulnerabilities
+### 6. Execute as migrações
+```bash
+php artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 7. Compile os assets
+```bash
+npm run build
+```
 
-## License
+### 8. Inicie o servidor
+```bash
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Acesse a aplicação em: `http://localhost:8000`
+
+## 🏃‍♂️ Execução em Desenvolvimento
+
+Para desenvolvimento com hot reload:
+
+```bash
+# Terminal 1 - Servidor Laravel
+php artisan serve
+
+# Terminal 2 - Build dos assets com watch
+npm run dev
+
+# Terminal 3 - Queue worker (se necessário)
+php artisan queue:work
+```
+
+Ou use o comando simplificado:
+```bash
+composer run dev
+```
+
+## 📊 Estrutura do Banco de Dados
+
+### Tabela: `tasks`
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| id | bigint | ID único da tarefa |
+| title | string | Título da tarefa |
+| description | text | Descrição detalhada (opcional) |
+| priority | enum | Prioridade (low, medium, high) |
+| due_date | date | Data de vencimento (opcional) |
+| completed | enum | Status (pending, completed) |
+| user_id | bigint | ID do usuário proprietário |
+| created_at | timestamp | Data de criação |
+| updated_at | timestamp | Data de atualização |
+
+## 🔄 Funcionalidades Principais
+
+### 📝 Gestão de Tarefas
+- **Criar Tarefa**: Formulário completo com título, descrição, prioridade e prazo
+- **Listar Tarefas**: Visualização paginada de todas as tarefas do usuário
+- **Editar Tarefa**: Modificação de dados existentes
+- **Excluir Tarefa**: Remoção definitiva de tarefas
+- **Filtros**: Organização por status e prioridade
+
+### 🔐 Sistema de Autenticação
+- **Registro de Usuário**: Criação de nova conta
+- **Login/Logout**: Autenticação segura
+- **Proteção de Rotas**: Acesso restrito a usuários autenticados
+- **Sessões Seguras**: Gerenciamento automático de sessões
+
+## 📁 Estrutura de Arquivos
+
+```
+to-dolist/
+├── app/
+│   ├── Http/Controllers/
+│   │   └── TaskController.php      # Controlador de tarefas
+│   ├── Models/
+│   │   ├── Task.php               # Model da tarefa
+│   │   └── User.php               # Model do usuário
+│   └── Actions/Fortify/           # Ações de autenticação
+├── database/
+│   ├── migrations/                # Migrações do banco
+│   └── factories/                 # Factories para testes
+├── resources/
+│   ├── views/                     # Templates Blade
+│   ├── js/                        # Arquivos JavaScript
+│   └── scss/                      # Arquivos de estilo
+├── routes/
+│   └── web.php                    # Definição de rotas
+└── tests/                         # Testes automatizados
+```
+
+## 🧪 Executando Testes
+
+```bash
+# Executar todos os testes
+./vendor/bin/pest
+
+# Executar testes com coverage
+./vendor/bin/pest --coverage
+
+# Executar testes específicos
+./vendor/bin/pest tests/Feature/TaskTest.php
+```
+
+## 🎨 Personalização
+
+### Modificar Estilos
+```bash
+# Edite os arquivos SCSS em resources/scss/
+npm run dev    # Para desenvolvimento
+npm run build  # Para produção
+```
+
+### Adicionar Novas Funcionalidades
+1. Crie uma nova migração: `php artisan make:migration`
+2. Crie um novo controller: `php artisan make:controller`
+3. Adicione rotas em `routes/web.php`
+4. Crie views em `resources/views/`
+
+## 🔧 Comandos Úteis
+
+```bash
+# Limpar cache
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+
+# Executar migrações
+php artisan migrate
+php artisan migrate:rollback
+
+# Gerar dados de teste
+php artisan db:seed
+
+# Verificar rotas
+php artisan route:list
+
+# Análise de código
+./vendor/bin/pint
+```
+
+## 📈 Performance
+
+### Otimizações Incluídas
+- **Paginação**: Listas de tarefas paginadas
+- **Cache de Configuração**: Cache automático em produção
+- **Otimização de Assets**: Minificação e compressão
+- **Lazy Loading**: Carregamento eficiente de dados
+
+### Recomendações para Produção
+```bash
+# Otimizar autoloader
+composer install --optimize-autoloader --no-dev
+
+# Cache de configuração
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Build de produção
+npm run build
+```
+
+## 🚀 Deploy
+
+### Preparação para Produção
+1. Configure variáveis de ambiente de produção
+2. Execute otimizações de cache
+3. Configure servidor web (Apache/Nginx)
+4. Configure SSL/HTTPS
+5. Configure backups automáticos
+
+## 🤝 Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature: `git checkout -b feature/nova-funcionalidade`
+3. Commit suas mudanças: `git commit -am 'Adiciona nova funcionalidade'`
+4. Push para a branch: `git push origin feature/nova-funcionalidade`
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 👨‍💻 Autor
+
+**M3NT0Sz**
+- GitHub: [@M3NT0Sz](https://github.com/M3NT0Sz)
+- Projeto: [To-DoList](https://github.com/M3NT0Sz/To-DoList)
+
+## 🆘 Suporte
+
+Encontrou um problema? Tem uma sugestão?
+- Abra uma [Issue](https://github.com/M3NT0Sz/To-DoList/issues)
+- Entre em contato através do GitHub
+
+---
+
+⭐ **Gostou do projeto? Deixe uma estrela no GitHub!** ⭐
