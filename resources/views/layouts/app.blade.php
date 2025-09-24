@@ -31,6 +31,7 @@
                 const labels = @json($labels);
                 const feitas = @json($feitas);
                 const aFazer = @json($aFazer);
+                const atrasadas = @json($atrasadas);
                 // Extrai anos apenas se o label começar com 4 dígitos (ano)
                 const years = [...new Set(labels.map(l => /^\d{4}/.test(l) ? l.substring(0, 4) : null).filter(Boolean))].map(Number).sort((a, b) => a - b);
                 const yearFilterContainer = document.getElementById('year-filter-container');
@@ -84,14 +85,16 @@
                     const filteredLabels = [];
                     const filteredFeitas = [];
                     const filteredAFazer = [];
+                    const filteredAtrasadas = [];
                     for (let m = 1; m <= 12; m++) {
                         const label = `${selectedYear}-${String(m).padStart(2, '0')}`;
                         const idx = labels.indexOf(label);
                         filteredLabels.push(label);
                         filteredFeitas.push(idx !== -1 ? feitas[idx] : 0);
                         filteredAFazer.push(idx !== -1 ? aFazer[idx] : 0);
+                        filteredAtrasadas.push(idx !== -1 ? atrasadas[idx] : 0);
                     }
-                    return { filteredLabels, filteredFeitas, filteredAFazer };
+                    return { filteredLabels, filteredFeitas, filteredAFazer, filteredAtrasadas };
                 }
 
                 function getMonthName(label) {
@@ -102,7 +105,7 @@
 
                 let chart;
                 function renderChart(year) {
-                    const { filteredLabels, filteredFeitas, filteredAFazer } = getFilteredData(year);
+                    const { filteredLabels, filteredFeitas, filteredAFazer, filteredAtrasadas } = getFilteredData(year);
                     const monthLabels = filteredLabels.map(getMonthName);
                     if (chart) chart.destroy();
                     chart = new Chart(ctx, {
@@ -123,6 +126,14 @@
                                     data: filteredAFazer,
                                     borderColor: '#6c757d',
                                     backgroundColor: 'rgba(108, 117, 125, 0.2)',
+                                    fill: true,
+                                    tension: 0.3
+                                },
+                                {
+                                    label: 'Tarefas atrasadas',
+                                    data: filteredAtrasadas,
+                                    borderColor: '#dc3545',
+                                    backgroundColor: 'rgba(220, 53, 69, 0.2)',
                                     fill: true,
                                     tension: 0.3
                                 }

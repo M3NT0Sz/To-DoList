@@ -21,7 +21,8 @@
                         <span class="me-2">
                             <i class="bi bi-square-fill text-primary"></i> Tarefas Feitas
                         </span>
-                        <span> <i class="bi bi-square-fill text-secondary"></i> Tarefas a Fazer </span>
+                        <span class="me-2"> <i class="bi bi-square-fill text-secondary"></i> Tarefas a Fazer </span>
+                        <span class="me-2"> <i class="bi bi-square-fill text-danger"></i> Tarefas Atrasadas </span>
                     </div>
                 </div>
             </div>

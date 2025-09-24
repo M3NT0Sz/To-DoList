@@ -19,6 +19,7 @@ class TaskController extends Controller
         $labels = [];
         $feitas = [];
         $aFazer = [];
+        $atrasadas = [];
 
         foreach ($anos as $ano) {
             for ($month = 1; $month <= 12; $month++) {
@@ -37,10 +38,18 @@ class TaskController extends Controller
                     ->whereMonth('due_date', $month)
                     ->where('user_id', auth()->id())
                     ->count();
+
+                $atrasadas[] = DB::table('tasks')
+                    ->where('completed', 'pending')
+                    ->whereYear('due_date', $ano)
+                    ->whereMonth('due_date', $month)
+                    ->where('due_date', '<', now())
+                    ->where('user_id', auth()->id())
+                    ->count();
             }
         }
 
-        return view('welcome', compact('labels', 'feitas', 'aFazer'));
+        return view('welcome', compact('labels', 'feitas', 'aFazer', 'atrasadas'));
     }
 
     public function index()
