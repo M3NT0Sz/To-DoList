@@ -20,9 +20,9 @@ class TaskFactory extends Factory
             'title' => fake()->name(),
             'description' => fake()->text(),
             'priority' => fake()->randomElement(['low', 'medium', 'high']),
-            'due_date' => fake()->dateTimeBetween('now', '+1 year'),
+            'due_date' => fake()->dateTimeBetween('-1 year', '+1 year'),
             'completed' => fake()->randomElement(['pending', 'completed']),
-            'user_id' => 13,
+            'user_id' => 1,
         ];
     }
 }
