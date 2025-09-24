@@ -58,10 +58,31 @@ class TaskController extends Controller
         return view('welcome', compact('labels', 'feitas', 'aFazer', 'atrasadas'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = \App\Models\Task::with('tags')->where('user_id', auth()->id())->paginate(10);
-        return view('tasks.index', ['tasks' => $tasks]);
+        $query = \App\Models\Task::with('tags')->where('user_id', auth()->id());
+        $allTags = \App\Models\Tag::all();
+        $filterTags = $request->input('tags', []);
+        if (!empty($filterTags)) {
+            $query->whereHas('tags', function($q) use ($filterTags) {
+                $q->whereIn('tags.id', $filterTags);
+            });
+        }
+        if ($request->filled('priority')) {
+            $query->where('priority', $request->priority);
+        }
+        if ($request->filled('completed')) {
+            $query->where('completed', $request->completed);
+        }
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%$search%")
+                  ->orWhere('description', 'like', "%$search%");
+            });
+        }
+        $tasks = $query->paginate(10)->appends($request->except('page'));
+        return view('tasks.index', compact('tasks', 'allTags'));
     }
 
     public function create()

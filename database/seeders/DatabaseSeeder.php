@@ -14,11 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-        Task::factory(50)->create();
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Cria tags
+        $tags = \App\Models\Tag::factory(5)->create();
+
+        // Cria tarefas para cada usuário, associando tags aleatórias
+        \App\Models\User::all()->each(function($user) use ($tags) {
+            $tasks = \App\Models\Task::factory(100)->create(['user_id' => '1']);
+            foreach ($tasks as $task) {
+                $task->tags()->sync($tags->random(rand(1, 3))->pluck('id')->toArray());
+            }
+        });
     }
 }

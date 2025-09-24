@@ -8,6 +8,49 @@
     @session('success')
         <div class="alert alert-success">{{ $value }}</div>
     @endsession
+    <form method="GET" class="mb-4 p-3 rounded shadow-sm bg-light">
+        <div class="row g-2 align-items-center">
+            <div class="col-md-4">
+                <label class="form-label">Tags</label>
+                <div class="border rounded p-2" style="min-height: 48px; background: #f8f9fa;">
+                    @foreach($allTags ?? [] as $tag)
+                        <label class="me-2 mb-1" style="cursor:pointer;">
+                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-check-input" style="margin-right: 4px;"
+                                {{ (request('tags') && in_array($tag->id, (array)request('tags'))) ? 'checked' : '' }}>
+                            <span class="badge" style="background-color: {{ $tag->color }}; color: #fff;">{{ $tag->name }}</span>
+                        </label>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="filter_priority" class="form-label">Prioridade</label>
+                <select name="priority" id="filter_priority" class="form-select">
+                    <option value="">Todas</option>
+                    <option value="low" {{ request('priority') == 'low' ? 'selected' : '' }}>Baixa</option>
+                    <option value="medium" {{ request('priority') == 'medium' ? 'selected' : '' }}>Média</option>
+                    <option value="high" {{ request('priority') == 'high' ? 'selected' : '' }}>Alta</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="filter_status" class="form-label">Status</label>
+                <select name="completed" id="filter_status" class="form-select">
+                    <option value="">Todos</option>
+                    <option value="pending" {{ request('completed') == 'pending' ? 'selected' : '' }}>Pendente</option>
+                    <option value="completed" {{ request('completed') == 'completed' ? 'selected' : '' }}>Concluída</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="filter_search" class="form-label">Buscar</label>
+                <input type="text" name="search" id="filter_search" class="form-control" placeholder="Título ou descrição" value="{{ request('search') }}">
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+            </div>
+        </div>
+        <div class="mt-2">
+            <a href="{{ route('tasks.index') }}" class="btn btn-link">Limpar filtros</a>
+        </div>
+    </form>
     <table class="table">
         <thead>
             <tr>
