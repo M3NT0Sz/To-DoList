@@ -25,25 +25,31 @@ class TaskController extends Controller
             for ($month = 1; $month <= 12; $month++) {
                 $label = sprintf('%04d-%02d', $ano, $month); // Exemplo: 2025-01
                 $labels[] = $label;
-                $aFazer[] = DB::table('tasks')
+
+                // Tarefas atrasadas (pendentes e vencidas)
+                $atrasadasCount = DB::table('tasks')
                     ->where('completed', 'pending')
                     ->whereYear('due_date', $ano)
                     ->whereMonth('due_date', $month)
+                    ->where('due_date', '<', now())
                     ->where('user_id', auth()->id())
                     ->count();
+                $atrasadas[] = $atrasadasCount;
+
+                // Tarefas a fazer (pendentes e não vencidas)
+                $aFazerCount = DB::table('tasks')
+                    ->where('completed', 'pending')
+                    ->whereYear('due_date', $ano)
+                    ->whereMonth('due_date', $month)
+                    ->where('due_date', '>=', now())
+                    ->where('user_id', auth()->id())
+                    ->count();
+                $aFazer[] = $aFazerCount;
 
                 $feitas[] = DB::table('tasks')
                     ->where('completed', 'completed')
                     ->whereYear('due_date', $ano)
                     ->whereMonth('due_date', $month)
-                    ->where('user_id', auth()->id())
-                    ->count();
-
-                $atrasadas[] = DB::table('tasks')
-                    ->where('completed', 'pending')
-                    ->whereYear('due_date', $ano)
-                    ->whereMonth('due_date', $month)
-                    ->where('due_date', '<', now())
                     ->where('user_id', auth()->id())
                     ->count();
             }
