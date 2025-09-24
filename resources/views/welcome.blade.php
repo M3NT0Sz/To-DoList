@@ -13,6 +13,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <div id="year-filter-container" class="mb-3"></div>
                     <div class="position-relative mb-4">
                         <canvas id="tasks-chart"></canvas>
                     </div>

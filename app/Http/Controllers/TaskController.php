@@ -10,22 +10,34 @@ class TaskController extends Controller
 {
     public function welcome()
     {
-        $labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        $aFazer = [];
+        $anos = DB::table('tasks')
+            ->selectRaw('YEAR(due_date) as ano')
+            ->distinct()
+            ->pluck('ano')
+            ->toArray();
+
+        $labels = [];
         $feitas = [];
+        $aFazer = [];
 
-        for ($month = 1; $month <= 12; $month++) {
-            $aFazer[] = DB::table('tasks')
-                ->where('completed', 'pending')
-                ->whereMonth('due_date', $month)
-                ->where('user_id', auth()->id())
-                ->count();
+        foreach ($anos as $ano) {
+            for ($month = 1; $month <= 12; $month++) {
+                $label = sprintf('%04d-%02d', $ano, $month); // Exemplo: 2025-01
+                $labels[] = $label;
+                $aFazer[] = DB::table('tasks')
+                    ->where('completed', 'pending')
+                    ->whereYear('due_date', $ano)
+                    ->whereMonth('due_date', $month)
+                    ->where('user_id', auth()->id())
+                    ->count();
 
-            $feitas[] = DB::table('tasks')
-                ->where('completed', 'completed')
-                ->whereMonth('due_date', $month)
-                ->where('user_id', auth()->id())
-                ->count();
+                $feitas[] = DB::table('tasks')
+                    ->where('completed', 'completed')
+                    ->whereYear('due_date', $ano)
+                    ->whereMonth('due_date', $month)
+                    ->where('user_id', auth()->id())
+                    ->count();
+            }
         }
 
         return view('welcome', compact('labels', 'feitas', 'aFazer'));
