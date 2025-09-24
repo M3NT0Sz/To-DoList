@@ -18,4 +18,8 @@ class Task extends Model
         'completed',
         'user_id',
     ];
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'task_tag');
+    }
 }

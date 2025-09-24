@@ -60,13 +60,14 @@ class TaskController extends Controller
 
     public function index()
     {
-        $tasks = DB::table('tasks')->where('user_id', auth()->id())->paginate(10);
+        $tasks = \App\Models\Task::with('tags')->where('user_id', auth()->id())->paginate(10);
         return view('tasks.index', ['tasks' => $tasks]);
     }
 
     public function create()
     {
-        return view('tasks.create');
+        $tags = \App\Models\Tag::all();
+        return view('tasks.create', compact('tags'));
     }
 
     public function store(Request $request)
@@ -77,15 +78,21 @@ class TaskController extends Controller
             'priority' => 'required',
             'due_date' => 'required',
             'completed' => 'required',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
-        Task::create(array_merge($input, ['user_id' => auth()->id()]));
+        $task = Task::create(array_merge($input, ['user_id' => auth()->id()]));
+        if ($request->has('tags')) {
+            $task->tags()->sync($request->tags);
+        }
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
 
     public function edit(Task $task)
     {
-        return view('tasks.edit', compact('task'));
+        $tags = \App\Models\Tag::all();
+        return view('tasks.edit', compact('task', 'tags'));
     }
 
     public function update(Request $request, Task $task)
@@ -96,9 +103,16 @@ class TaskController extends Controller
             'priority' => 'required',
             'due_date' => 'required',
             'completed' => 'required',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
         $task->update($input);
+        if ($request->has('tags')) {
+            $task->tags()->sync($request->tags);
+        } else {
+            $task->tags()->detach();
+        }
         return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
     }
 

@@ -21,6 +21,17 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="mb-3">
+            <label class="form-label">Tags</label>
+            <div class="border rounded p-2" style="min-height: 48px; background: #f8f9fa;">
+                @foreach($tags as $tag)
+                    <label class="me-2 mb-1" style="cursor:pointer;">
+                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-check-input" style="margin-right: 4px;">
+                        <span class="badge" style="background-color: {{ $tag->color }}; color: #fff;">{{ $tag->name }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+        <div class="mb-3">
             <label class="form-label">Priority</label>
             <select class="form-select" name="priority">
                 <option value="low">Low</option>
